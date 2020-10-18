@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    stages {
+        stage('When') {
+            when {
+                not {
+                    branch "main"
+                }
+            }
+            steps {
+                echo 'Hola'
+            }
+        }
+        stage('Confirmation 1') {
+                steps {
+                    input('Do you want to proceed?')
+                }
+        }
+        stage('GoodBye') {
+            steps {
+                echo 'Good Bye'
+                echo 'GoodBye 3'
+            }
+        }
+        stage('Confirmation 2') {
+                steps {
+                    input('Do you want to proceed?')
+                }
+        }
+        stage('Stage3') {
+            steps {
+                echo 'Good Bye'
+                echo 'GoodBye 4'
+            }
+        }
+    }
+}
