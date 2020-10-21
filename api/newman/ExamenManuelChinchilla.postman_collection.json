@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "0d71dd46-8a24-4562-a00e-a46c5eef957c",
+		"name": "ExamenManuelChinchilla",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b6c01970-110f-4d50-9b3d-46fdeb8788e6",
+						"exec": [
+							"pm.test(\"Get status OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RandomName_UnauthorizedUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe144826-fb3c-4e0e-9646-1115bfc1b026",
+						"exec": [
+							"pm.test(\"Not Logged in test\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Please login first\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/randomName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"randomName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RandomName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b6ac82e6-d1b8-4810-81b0-cbb481769b14",
+						"exec": [
+							"pm.test(\"Random Name OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "testpass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "testuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/randomName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"randomName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SameNameValid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b59a897-eae2-4475-975b-eb387cbbe8d9",
+						"exec": [
+							"pm.test(\"Same name OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Stone Cold\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/sameName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"sameName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SameNameInvalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7b7fac1b-b3e9-49df-9892-aad24cf2151a",
+						"exec": [
+							"pm.test(\"Same name Not Acceptable\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Name is not valid\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Manuel\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/sameName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"sameName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutNameNoBody",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0421f6fe-0764-4769-96a5-308710d5a1ed",
+						"exec": [
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Name was not provided\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/updateName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"updateName"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
