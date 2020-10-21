@@ -1,5 +1,5 @@
 {
-  "name": "mocha-sample",
+  "name": "examen",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coffeestainio/mocha-sample.git"
+    "url": "git+https://github.com/mchto/load-api-testing.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/coffeestainio/mocha-sample/issues"
+    "url": "https://github.com/mchto/load-api-testing/issues"
   },
-  "homepage": "https://github.com/coffeestainio/mocha-sample#readme",
+  "homepage": "https://github.com/mchto/load-api-testing#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.1.3"
