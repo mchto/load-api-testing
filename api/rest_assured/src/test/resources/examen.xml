@@ -6,6 +6,8 @@
         <classes>
             <class name="getStatus" />
             <class name="putName" />
+            <class name="getRandomName" />
+            <class name="sameName" />
         </classes>
     </test>
 </suite>
