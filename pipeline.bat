@@ -6,10 +6,11 @@ node --version
 cd api/newman
 newman run ExamenManuelChinchilla.postman_collection.json -e envExamManuelChinchilla.postman_environment.json
 cd ..
+cd ..
 
 echo 'rest assured test'
 
-cd rest_assured
+cd api/rest_assured
 mvn clean test
 cd ..
 cd ..
