@@ -1,36 +1,39 @@
 pipeline {
     agent any
     stages {
-        stage('When') {
-            when {
-                not {
-                    branch "main"
+        stage('Newman Tests') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    sh '''
+                    node --version
+                    cd api/newman
+                    newman run ExamenManuelChinchilla.postman_collection.json -e envExamManuelChinchilla.postman_environment.json
+                    cd ..
+                    '''
                 }
             }
-            steps {
-                echo 'Hola'
-            }
         }
-        stage('Confirmation 1') {
+        stage('Rest Assured Tests') {
                 steps {
-                    input('Do you want to proceed?')
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                        sh '''
+                        cd rest_assured
+                        mvn clean test
+                        cd ..
+                        cd ..
+                        '''
+                    }
                 }
         }
-        stage('GoodBye') {
+        stage('jMeter Tests') {
             steps {
-                echo 'Good Bye'
-                echo 'GoodBye 3'
-            }
-        }
-        stage('Confirmation 2') {
-                steps {
-                    input('Do you want to proceed?')
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    sh '''
+                    cd load
+                    jmeter -n -t examen_test_plan.jmx
+                    cd ..
+                    '''
                 }
-        }
-        stage('Stage3') {
-            steps {
-                echo 'Good Bye'
-                echo 'GoodBye 4'
             }
         }
     }
